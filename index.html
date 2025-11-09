@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Red Roses Falling - Music Visual</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      height: 100vh;
+      background: radial-gradient(circle at top, #ffe6eb, #fff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      transition: background 1s ease;
+    }
+
+    h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2rem;
+      color: #c2185b;
+      margin-bottom: 10px;
+    }
+
+    .flower {
+      position: absolute;
+      top: -100px;
+      width: 50px;
+      height: 50px;
+      background-image: url('https://github.com/Elino042/MyProject02/Rose_flower.JPG/600px-Rose_flower.JPG'); /* Realistic red rose image */
+      background-size: cover;
+      background-position: center;
+      animation: fall linear infinite;
+      opacity: 0.95;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0.8;
+      }
+    }
+
+    audio {
+      position: fixed;
+      bottom: 20px;
+      width: 320px;
+      border-radius: 12px;
+    }
+
+    button {
+      background-color: #c2185b;
+      color: #fff;
+      font-size: 1rem;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #9c1548;
+    }
+  </style>
+</head>
+<body>
+  <h1>Chinwendu my Bestie</h1>
+  <button id="playBtn">Play Music & Animation</button>
+  <audio id="bgMusic">
+    <source src="https://github.com/Elino042/MyProject02/Rewrite Our Story.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    const numFlowers = 25;
+    const flowers = [];
+    const audio = document.getElementById('bgMusic');
+    const playBtn = document.getElementById('playBtn');
+
+    function createFlowers() {
+      for (let i = 0; i < numFlowers; i++) {
+        const flower = document.createElement('div');
+        flower.classList.add('flower');
+        flower.style.left = Math.random() * 100 + 'vw';
+        flower.style.animationDuration = 10 + Math.random() * 8 + 's';
+        flower.style.animationDelay = Math.random() * 5 + 's';
+        flower.style.width = 30 + Math.random() * 40 + 'px';
+        flower.style.height = flower.style.width;
+        document.body.appendChild(flower);
+        flowers.push(flower);
+      }
+    }
+
+    function removeFlowers() {
+      flowers.forEach(flower => flower.remove());
+      flowers.length = 0;
+    }
+
+    playBtn.addEventListener('click', () => {
+      audio.play();
+      playBtn.style.display = 'none';
+      createFlowers();
+    });
+
+    audio.addEventListener('ended', () => {
+      removeFlowers();
+      playBtn.style.display = 'block';
+    });
+  </script>
+</body>
+</html>
