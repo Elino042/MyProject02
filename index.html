@@ -26,29 +26,28 @@
       z-index: 10;
       position: relative;
     }
+.flower {
+position: absolute;
+top: -100px;
+width: 40px;
+height: 40px;
+background-image: url('https://cdn-icons-png.flaticon.com/512/765/765614.png');
+background-size: cover;
+animation: fall linear infinite;
+opacity: 0.9;
+}
 
-    .flower {
-      position: absolute;
-      top: -50px;
-      width: 50px;
-      height: 50px;
-      background-image: url('https://raw.githubusercontent.com/Elino042/MyProject02/main/Rose_flower.JPG');
-      background-size: cover;
-      background-position: center;
-      opacity: 0.95;
-    }
 
-    @keyframes fall {
-      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-      100% { transform: translateY(110vh) rotate(360deg); opacity: 0.8; }
-    }
-
-    @keyframes sway {
-      0%, 100% { transform: translateX(0); }
-      50% { transform: translateX(20px); }
-    }
-
-    audio {
+@keyframes fall {
+0% {
+transform: translateY(0) rotate(0deg);
+opacity: 1;
+}
+100% {
+transform: translateY(110vh) rotate(360deg);
+opacity: 0.7;
+}
+}    audio {
       position: fixed;
       bottom: 20px;
       width: 320px;
