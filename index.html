@@ -23,29 +23,29 @@
       font-size: 2rem;
       color: #c2185b;
       margin-bottom: 10px;
+      z-index: 10;
+      position: relative;
     }
 
     .flower {
       position: absolute;
-      top: -100px;
+      top: -50px;
       width: 50px;
       height: 50px;
-      background-image: url('https://raw.githubusercontent.com/Elino042/MyProject02/main/Rose_flower.JPG'); /* Realistic red rose image */
+      background-image: url('https://raw.githubusercontent.com/Elino042/MyProject02/main/Rose_flower.JPG');
       background-size: cover;
       background-position: center;
-      animation: fall linear infinite;
       opacity: 0.95;
     }
 
     @keyframes fall {
-      0% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(110vh) rotate(360deg);
-        opacity: 0.8;
-      }
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0.8; }
+    }
+
+    @keyframes sway {
+      0%, 100% { transform: translateX(0); }
+      50% { transform: translateX(20px); }
     }
 
     audio {
@@ -53,6 +53,7 @@
       bottom: 20px;
       width: 320px;
       border-radius: 12px;
+      z-index: 10;
     }
 
     button {
@@ -64,6 +65,8 @@
       border-radius: 8px;
       cursor: pointer;
       transition: background 0.3s;
+      z-index: 10;
+      position: relative;
     }
 
     button:hover {
@@ -89,11 +92,22 @@
       for (let i = 0; i < numFlowers; i++) {
         const flower = document.createElement('div');
         flower.classList.add('flower');
+
+        // Random horizontal starting position
         flower.style.left = Math.random() * 100 + 'vw';
-        flower.style.animationDuration = 10 + Math.random() * 8 + 's';
-        flower.style.animationDelay = Math.random() * 5 + 's';
-        flower.style.width = 30 + Math.random() * 40 + 'px';
-        flower.style.height = flower.style.width;
+
+        // Random size
+        const size = 30 + Math.random() * 40;
+        flower.style.width = size + 'px';
+        flower.style.height = size + 'px';
+
+        // Random fall and sway duration
+        const fallDuration = 8 + Math.random() * 7; // 8–15s
+        const swayDuration = 2 + Math.random() * 3; // 2–5s
+
+        flower.style.animation = `fall ${fallDuration}s linear infinite, sway ${swayDuration}s ease-in-out infinite`;
+        flower.style.animationDelay = `${Math.random() * 5}s, 0s`;
+
         document.body.appendChild(flower);
         flowers.push(flower);
       }
@@ -117,4 +131,3 @@
   </script>
 </body>
 </html>
-
